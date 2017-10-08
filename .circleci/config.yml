@@ -4,6 +4,7 @@ jobs:
     machine:
       image: circleci/classic:201709-01
     environment:
+      GOPATH: /home/circleci
       SRCDIR: /home/circleci/src/github.com/weaveworks/weave
       CIRCLE_ARTIFACTS: /tmp/artifacts
     parallelism: 2
