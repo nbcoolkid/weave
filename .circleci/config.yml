@@ -5,12 +5,14 @@ jobs:
       image: circleci/classic:201709-01
     environment:
       SRCDIR: /home/circleci/src/github.com/weaveworks/weave
+      CIRCLE_ARTIFACTS: /tmp/artifacts
     parallelism: 2
     branches:
       ignore:
         - docs
     steps:
       - checkout
+      - run: mkdir $CIRCLE_ARTIFACTS
       # copy source dir and submodule update --init
       - run: bin/circle-dependencies-post-sources
       - restore_cache:
@@ -42,6 +44,8 @@ jobs:
       # run goveralls; copy coverage reports to artifacts dir
       - deploy:
           command: $SRCDIR/bin/circle-teardown-pre
+      - store_artifacts:
+          path: $CIRCLE_ARTIFACTS
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
