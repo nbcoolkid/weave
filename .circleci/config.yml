@@ -6,7 +6,6 @@ jobs:
     environment:
       GOPATH: /home/ubuntu:$GOPATH
       SRCDIR: /home/ubuntu/src/github.com/weaveworks/weave
-      PATH: $PATH:$HOME/.local/bin:/opt/google-cloud-sdk/bin
       CLOUDSDK_CORE_DISABLE_PROMPTS: 1
       # Base name of VMs for integration tests:
       NAME: test-$CIRCLE_BUILD_NUM-$CIRCLE_NODE_INDEX
@@ -48,7 +47,10 @@ jobs:
       - run: bin/circle-test-teardown
       # Destroy testing VMs:
       - run:
-          command: "cd $SRCDIR/test && ./run-integration-tests.sh destroy"
+          command: |
+            cd $SRCDIR/test
+            export PATH="$PATH:$HOME/.local/bin:/opt/google-cloud-sdk/bin
+            ./run-integration-tests.sh destroy
           background: true
       # run goveralls; copy coverage reports to artifacts dir
       - deploy:
