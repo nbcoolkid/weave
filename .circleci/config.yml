@@ -17,6 +17,9 @@ jobs:
       USE_IMAGE: 1
       DISK_NAME_PREFIX: test-$CIRCLE_BUILD_NUM-0
     parallelism: 2
+    branches:
+      ignore:
+        - docs
     steps:
       - checkout
       # copy source dir and submodule update --init
