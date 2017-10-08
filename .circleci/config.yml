@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     machine:
-      image: classic:latest
+      image: circleci/classic:201709-01
     environment:
       GOPATH: /home/ubuntu:$GOPATH
       SRCDIR: /home/ubuntu/src/github.com/weaveworks/weave
