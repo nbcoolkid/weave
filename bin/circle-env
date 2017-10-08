@@ -1,6 +1,6 @@
 # Set environment variables here because CircleCI can't expand $FOO in 'env' section
 
-export PATH="$PATH:$HOME/.local/bin:/opt/google-cloud-sdk/bin
+export PATH="$PATH:/opt/google-cloud-sdk/bin"
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 # Base name of VMs for integration tests:
 export NAME=test-$CIRCLE_BUILD_NUM-$CIRCLE_NODE_INDEX

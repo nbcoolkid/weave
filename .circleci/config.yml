@@ -14,7 +14,7 @@ jobs:
       # copy source dir and submodule update --init
       - run: bin/circle-dependencies-post-sources
       - restore_cache:
-          keys: v1-cache-{{ checksum "build/Dockerfile" }}-{{ checksum "build/build.sh" }}
+          key: v1-cache-{{ checksum "build/Dockerfile" }}-{{ checksum "build/build.sh" }}
       # kick off creation of test VMs
       - run:
           command: bin/provision_test_vms.sh
