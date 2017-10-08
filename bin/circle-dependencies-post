@@ -2,8 +2,6 @@
 
 set -e
 
-cd "$SRCDIR"
-git submodule update --init
 cd "$SRCDIR/build"
 ../tools/rebuild-image weaveworks/weavebuild . Dockerfile build.sh
 touch "$SRCDIR/.build.uptodate"
