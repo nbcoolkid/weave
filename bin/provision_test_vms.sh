@@ -24,7 +24,7 @@ function install_ansible() {
     exit 1
 }
 
-export PATH="$PATH:$HOME/.local/bin:/opt/google-cloud-sdk/bin"
+source "$SRCDIR/bin/circle-env"
 
 install_terraform >>"$TEST_VMS_SETUP_OUTPUT_FILE" 2>&1
 install_ansible >>"$TEST_VMS_SETUP_OUTPUT_FILE" 2>&1

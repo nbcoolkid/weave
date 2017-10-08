@@ -4,17 +4,7 @@ jobs:
     machine:
       image: circleci/classic:201709-01
     environment:
-      GOPATH: /home/ubuntu:$GOPATH
-      SRCDIR: /home/ubuntu/src/github.com/weaveworks/weave
-      CLOUDSDK_CORE_DISABLE_PROMPTS: 1
-      # Base name of VMs for integration tests:
-      NAME: test-$CIRCLE_BUILD_NUM-$CIRCLE_NODE_INDEX
-      TEST_VMS_SETUP_OUTPUT_FILE: $CIRCLE_ARTIFACTS/test_vms_setup_output.txt
-      TEST_VMS_PROV_AND_CONF_LOCK_FILE: $CIRCLE_ARTIFACTS/test_vms_provisioned_and_configured.txt
-      TEST_VMS_READY_LOCK_FILE: $CIRCLE_ARTIFACTS/test_vms_ready.txt
-      # Google Cloud Platorm images for integration tests:
-      USE_IMAGE: 1
-      DISK_NAME_PREFIX: test-$CIRCLE_BUILD_NUM-0
+      SRCDIR: /home/circleci/src/github.com/weaveworks/weave
     parallelism: 2
     branches:
       ignore:
@@ -47,10 +37,7 @@ jobs:
       - run: bin/circle-test-teardown
       # Destroy testing VMs:
       - run:
-          command: |
-            cd $SRCDIR/test
-            export PATH="$PATH:$HOME/.local/bin:/opt/google-cloud-sdk/bin
-            ./run-integration-tests.sh destroy
+          command: bin/circle-destroy-vms
           background: true
       # run goveralls; copy coverage reports to artifacts dir
       - deploy:
