@@ -172,6 +172,7 @@ PACKAGE_BASE=$(shell go list -e ./)
 
 all: $(WEAVE_EXPORT)
 testrunner: $(RUNNER_EXE) $(TEST_TLS_EXE)
+netplugin: $(PLUGIN_UPTODATE)
 
 $(WEAVER_EXE) $(WEAVEUTIL_EXE): common/*.go common/*/*.go net/*.go net/*/*.go
 $(WEAVER_EXE): router/*.go ipam/*.go ipam/*/*.go db/*.go nameserver/*.go prog/weaver/*.go

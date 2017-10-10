@@ -7,4 +7,4 @@ cd "$SRCDIR/build"
 touch "$SRCDIR/.build.uptodate"
 cd "$SRCDIR"
 make testrunner
-make COVERAGE=true RM= exes all
+make COVERAGE=true RM= exes all netplugin
