@@ -270,6 +270,7 @@ func main() {
 	var proxy *weaveproxy.Proxy
 	var err error
 	if proxyConfig.Enabled {
+		proxyConfig.DNSListenAddress = dnsConfig.addressOnly()
 		if noDNS {
 			proxyConfig.WithoutDNS = true
 		}
