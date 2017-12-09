@@ -1256,7 +1256,6 @@ launch() {
         --host-root=/host \
         $(router_bridge_opts) \
         --ipalloc-range "$IPRANGE" \
-        --dns-effective-listen-address $DOCKER_BRIDGE_IP \
         --dns-listen-address $DOCKER_BRIDGE_IP:53 \
         --http-addr $HTTP_ADDR \
         --status-addr $STATUS_ADDR \
