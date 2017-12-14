@@ -28,7 +28,8 @@ func CreateAndAttachVeth(name, peerName, bridgeName string, mtu int, keepTXOn bo
 			MTU:  mtu},
 		PeerName: peerName,
 	}
-	if err := netlink.LinkAdd(veth); err != nil {
+
+	if err := LinkAddIfNotExist(veth); err != nil {
 		return nil, fmt.Errorf(`could not create veth pair %s-%s: %s`, name, peerName, err)
 	}
 

@@ -89,3 +89,25 @@ func AddDatapathInterface(dpname string, ifname string) error {
 	_, err = dp.CreateVport(odp.NewNetdevVportSpec(ifname))
 	return err
 }
+
+// TODO(mp) maybe replace ^^
+func AddDatapathInterfaceIfNotExist(dpname string, ifname string) error {
+	dpif, err := odp.NewDpif()
+	if err != nil {
+		return err
+	}
+	defer dpif.Close()
+
+	dp, err := dpif.LookupDatapath(dpname)
+	if err != nil {
+		return err
+	}
+
+	_, err = dp.CreateVport(odp.NewNetdevVportSpec(ifname))
+	// TODO(mp) check openvswitch.h
+	if err == odp.NetlinkError(syscall.EEXIST) {
+		return nil
+	}
+
+	return err
+}
